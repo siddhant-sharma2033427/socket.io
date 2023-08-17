@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello world</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+</head>
+<body>
+    <p>Hello world</p>
+    <script>
+        //here automatically connect to backend io
+        var socket = io();
+        //here we are reseving message from backend and 
+        //directly writing it on page
+        socket.on('message',function(data){
+            document.write(data);
+        });
+        //receving custom message or event
+        socket.on('MyCustomEvent',function(data){
+            document.write(data.description);
+        });
+        //sending event from client to server
+        setTimeout(function(){
+        //emit is use to create custom message
+        //we can send object or string
+        socket.emit('ClientToServer',{description:"A custom message"});
+    },5000)
+    </script>
+</body>
+</html>
