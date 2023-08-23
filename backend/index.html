@@ -28,16 +28,17 @@
     //     socket.emit('ClientToServer',{description:"A custom message"});
     // },5000)
 
-    socket.on('newuserconnect',function(data){
-        document.body.innerHTML = '';
-        document.write(data.message);
-    })
+    // socket.on('newuserconnect',function(data){
+    //     document.body.innerHTML = '';
+    //     document.write(data.message);
+    // })
     
     //namespace
     socket.on('customEvent',function(data){
         document.body.innerHTML = '';
         document.write(data);
     });
+    
     </script>
 </body>
 </html>
