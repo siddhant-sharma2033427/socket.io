@@ -21,6 +21,8 @@ var users = 0;
 io.on('connection', function (socket) {
     console.log("A user connected")
     users++;
+
+
     //here we are sending message to front end when any user gets connected
     // setTimeout(function(){
     //     socket.send("Sending you a message from backend");
@@ -30,23 +32,41 @@ io.on('connection', function (socket) {
     //     //we can send object or string
     //     socket.emit('MyCustomEvent',{description:"A custom message"});
     // },4000)
+
+
     //When ever any user disconnect
     //Receving message from client side
     // socket.on('ClientToServer',function(data){
     //     console.log(data.description)
     // })
     socket.emit('newuserconnect',{message: ' hi welcome'})
+
+
     //only broadcast to those who are connected
     socket.broadcast.emit("newuserconnect",{message: users + " user connected"});
+
+
     // will show to all the user
     // io.sockets.emit("")
+
+
+  
+   
     socket.on('disconnect', function () {
         console.log("A user disconnected");
         users--;
         socket.broadcast.emit("newuserconnect",{message: users + " user connected/"});
     });
 });
-
+//namespace
+  var cnsp = io.of('/custom');
+  cnsp.on('connection',function(socket){
+    console.log("a user accessed cutom");
+    cnsp.emit('customEvent','custom event called')
+    socket.on('disconnect',function(){
+        console.log("custom user disconnect")
+    })
+  })
 http.listen(5000, function () {
     console.log("server connected");
 })

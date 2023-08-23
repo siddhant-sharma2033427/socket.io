@@ -11,7 +11,7 @@
     <p>Hello world</p>
     <script>
         //here automatically connect to backend io
-        var socket = io();
+        var socket = io('/custom');
         //here we are reseving message from backend and 
         //directly writing it on page
         // socket.on('message',function(data){
@@ -32,6 +32,12 @@
         document.body.innerHTML = '';
         document.write(data.message);
     })
+    
+    //namespace
+    socket.on('customEvent',function(data){
+        document.body.innerHTML = '';
+        document.write(data);
+    });
     </script>
 </body>
 </html>
