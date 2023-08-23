@@ -14,19 +14,24 @@
         var socket = io();
         //here we are reseving message from backend and 
         //directly writing it on page
-        socket.on('message',function(data){
-            document.write(data);
-        });
+        // socket.on('message',function(data){
+        //     document.write(data);
+        // });
         //receving custom message or event
-        socket.on('MyCustomEvent',function(data){
-            document.write(data.description);
-        });
-        //sending event from client to server
-        setTimeout(function(){
-        //emit is use to create custom message
-        //we can send object or string
-        socket.emit('ClientToServer',{description:"A custom message"});
-    },5000)
+    //     socket.on('MyCustomEvent',function(data){
+    //         document.write(data.description);
+    //     });
+    //     //sending event from client to server
+    //     setTimeout(function(){
+    //     //emit is use to create custom message
+    //     //we can send object or string
+    //     socket.emit('ClientToServer',{description:"A custom message"});
+    // },5000)
+
+    socket.on('newuserconnect',function(data){
+        document.body.innerHTML = '';
+        document.write(data.message);
+    })
     </script>
 </body>
 </html>

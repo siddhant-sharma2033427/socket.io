@@ -35,12 +35,15 @@ io.on('connection', function (socket) {
     // socket.on('ClientToServer',function(data){
     //     console.log(data.description)
     // })
-    io.emit('broadcast',{message: users + ' users connected'})
-    socket.broadcast()
-    socket.on('disconnect', function (socket) {
+    socket.emit('newuserconnect',{message: ' hi welcome'})
+    //only broadcast to those who are connected
+    socket.broadcast.emit("newuserconnect",{message: users + " user connected"});
+    // will show to all the user
+    // io.sockets.emit("")
+    socket.on('disconnect', function () {
         console.log("A user disconnected");
         users--;
-        io.emit('broadcast',{message: users + 'users connected'})
+        socket.broadcast.emit("newuserconnect",{message: users + " user connected/"});
     });
 });
 
