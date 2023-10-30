@@ -18,8 +18,14 @@ app.get('/', function(req,res){
 //to connect socket from front end to backend we need to add script to front end eg in index.html file
 //when ever we connect anything then this function will start
 //here 'socket' is a object of user connected to socket
+//here on is use to catch event like connection and disconnect
 io.on('connection',function(socket){
     console.log("A user connected")
+
+    //sending custom message when user get connected
+    setTimeout(function(){
+        socket.send("sending you a message");
+    },3000)
     //When ever any user disconnect
     socket.on('disconnect',function(socket){
         console.log("A user disconnected");
